@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ana renkler -->
+    <color name="red_primary">#E50914</color>
+    <color name="red_dark">#B20710</color>
+    <color name="red_accent">#FF4444</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Light tema -->
+    <color name="background">#F5F5F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#1A1A1A</color>
+    <color name="text_secondary">#757575</color>
+    <color name="card_background">#FFFFFF</color>
+
+    <!-- Ortak -->
+    <color name="rating_color">#FFD700</color>
+    <color name="overlay">#80000000</color>
+
+    <!-- Home Light Theme (day mode) -->
+    <color name="home_background">#F2F2F2</color>
+    <color name="home_surface">#FFFFFF</color>
+    <color name="home_card">#EBEBEB</color>
+    <color name="home_search_bg">#E0E0E0</color>
+    <color name="home_text_primary">#111111</color>
+    <color name="home_text_secondary">#666666</color>
+    <color name="chip_selected_bg">#111111</color>
+    <color name="chip_selected_text">#FFFFFF</color>
+    <color name="chip_unselected_stroke">#BBBBBB</color>
+
+</resources>

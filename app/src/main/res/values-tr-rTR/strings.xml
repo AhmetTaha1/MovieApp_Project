@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Flixera</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Ana Sayfa</string>
+    <string name="nav_search">Ara</string>
+    <string name="nav_favorites">Favoriler</string>
+    <string name="nav_recommendations">Sana Özel</string>
+
+    <!-- Home -->
+    <string name="popular_movies">Popüler Filmler</string>
+    <string name="see_all">Tümünü Gör</string>
+
+    <!-- Search -->
+    <string name="search_hint">Film, oyuncu, tür ara...</string>
+    <string name="search_results">Arama Sonuçları</string>
+    <string name="no_results">Sonuç bulunamadı</string>
+
+    <!-- Detail -->
+    <string name="add_favorite">Favorilere Ekle</string>
+    <string name="remove_favorite">Favorilerden Çıkar</string>
+    <string name="movie_summary">Özet</string>
+    <string name="cast">Oyuncular</string>
+    <string name="trailer">Fragmanı İzle</string>
+    <string name="imdb_rating">IMDB Puanı</string>
+    <string name="genre">Tür</string>
+    <string name="director">Yönetmen</string>
+    <string name="year">Yıl</string>
+
+    <!-- Favorites -->
+    <string name="no_favorites">Henüz favori eklenmedi</string>
+    <string name="favorites_title">Favorilerim</string>
+
+    <!-- Recommendations -->
+    <string name="recommendations_title">Sana Özel Öneriler</string>
+    <string name="no_recommendations">Öneri almak için favorilere film ekle</string>
+
+    <!-- General -->
+    <string name="loading">Yükleniyor...</string>
+    <string name="error_message">Bir şeyler ters gitti</string>
+    <string name="retry">Tekrar Dene</string>
+
+    <!-- Profile / Settings -->
+    <string name="settings">Ayarlar</string>
+    <string name="dark_mode">Karanlık Mod</string>
+    <string name="language">Dil</string>
+    <string name="admin_panel">Admin Paneli</string>
+    <string name="sign_out">Çıkış Yap</string>
+    <string name="get_ai_recommendations">Yapay Zeka Önerileri Al</string>
+    <string name="my_favorites">Favorilerim</string>
+    <string name="start_adding_movies">Sevdiğin filmleri eklemeye başla!</string>
+    <string name="top_genre">En İyi Tür</string>
+    <string name="favorites">Favoriler</string>
+
+    <!-- Admin -->
+    <string name="registered_users">Kayıtlı Kullanıcılar</string>
+    <string name="delete_user">Sil</string>
+    <string name="delete_confirm_title">Kullanıcı Sil</string>
+    <string name="delete_confirm_message">Bu kullanıcıyı silmek istediğinize emin misiniz?</string>
+    <string name="cancel">İptal</string>
+
+    <!-- Login -->
+    <string name="login">Giriş Yap</string>
+    <string name="forgot_password">Şifremi Unuttum?</string>
+    <string name="reset_password_title">Şifre Sıfırla</string>
+    <string name="reset_password_message">Kayıtlı e-posta adresinizi girin.</string>
+    <string name="new_password_title">Yeni Şifre</string>
+
+    <!-- Favorites sort -->
+    <string name="sort">Sırala</string>
+    <string name="sort_default">Varsayılan (Son Eklenen)</string>
+    <string name="sort_az">Başlık A → Z</string>
+    <string name="sort_za">Başlık Z → A</string>
+</resources>

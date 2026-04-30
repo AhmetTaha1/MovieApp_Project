@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.movielog.app.ui.home.HomeFragment"
+        android:label="@string/nav_home"/>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.movielog.app.ui.favorites.FavoritesFragment"
+        android:label="@string/nav_favorites"/>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.movielog.app.ui.search.SearchFragment"
+        android:label="@string/nav_search"/>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.movielog.app.ui.profile.ProfileFragment"
+        android:label="Profile">
+        <action
+            android:id="@+id/action_profile_to_recommendations"
+            app:destination="@id/recommendationsFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/recommendationsFragment"
+        android:name="com.movielog.app.ui.recommendations.RecommendationsFragment"
+        android:label="@string/nav_recommendations"/>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.movielog.app.ui.detail.DetailFragment"
+        android:label="Movie Detail">
+        <argument
+            android:name="movieId"
+            app:argType="string"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/browseCategoryFragment"
+        android:name="com.movielog.app.ui.browse.BrowseCategoryFragment"
+        android:label="Browse">
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="Action"/>
+    </fragment>
+
+</navigation>
