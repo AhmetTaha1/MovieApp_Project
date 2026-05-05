@@ -34,6 +34,13 @@ public class HomeFragment extends Fragment {
     private FeaturedAdapter featuredAdapter;
     private HorizontalMovieAdapter topPicksAdapter;
     private HorizontalMovieAdapter popularShowsAdapter;
+    private HorizontalMovieAdapter actionAdapter;
+    private HorizontalMovieAdapter comedyAdapter;
+    private HorizontalMovieAdapter dramaAdapter;
+    private HorizontalMovieAdapter horrorAdapter;
+    private HorizontalMovieAdapter sciFiAdapter;
+    private HorizontalMovieAdapter adventureAdapter;
+    private HorizontalMovieAdapter romanceAdapter;
 
     private View[] dots;
     private int currentDot = 0;
@@ -57,6 +64,7 @@ public class HomeFragment extends Fragment {
         setupFeaturedCarousel();
         setupTopPicks();
         setupPopularShows();
+        setupCategoryLists();
         setupViewModels();
         setupSeeAllButtons();
     }
@@ -181,6 +189,36 @@ public class HomeFragment extends Fragment {
         binding.rvPopularShows.setAdapter(popularShowsAdapter);
     }
 
+    private void setupCategoryLists() {
+        actionAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvActionMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvActionMovies.setAdapter(actionAdapter);
+
+        comedyAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvComedyMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvComedyMovies.setAdapter(comedyAdapter);
+
+        dramaAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvDramaMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvDramaMovies.setAdapter(dramaAdapter);
+
+        horrorAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvHorrorMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvHorrorMovies.setAdapter(horrorAdapter);
+
+        sciFiAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvScifiMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvScifiMovies.setAdapter(sciFiAdapter);
+
+        adventureAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvAdventureMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvAdventureMovies.setAdapter(adventureAdapter);
+
+        romanceAdapter = new HorizontalMovieAdapter(this::navigateToDetail);
+        binding.rvRomanceMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvRomanceMovies.setAdapter(romanceAdapter);
+    }
+
     private void setupViewModels() {
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         // Activity scope'ta paylaşılan ViewModels
@@ -198,6 +236,29 @@ public class HomeFragment extends Fragment {
         // Popular shows (her zaman OMDB'den)
         viewModel.getPopularShowsMovies().observe(getViewLifecycleOwner(), movies -> {
             if (movies != null) popularShowsAdapter.setMovies(movies);
+        });
+
+        // Kategori listeleri
+        viewModel.getActionMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) actionAdapter.setMovies(movies);
+        });
+        viewModel.getComedyMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) comedyAdapter.setMovies(movies);
+        });
+        viewModel.getDramaMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) dramaAdapter.setMovies(movies);
+        });
+        viewModel.getHorrorMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) horrorAdapter.setMovies(movies);
+        });
+        viewModel.getSciFiMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) sciFiAdapter.setMovies(movies);
+        });
+        viewModel.getAdventureMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) adventureAdapter.setMovies(movies);
+        });
+        viewModel.getRomanceMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null) romanceAdapter.setMovies(movies);
         });
 
         // TOP PICKS: Önce OMDB yükle (her zaman içerik göster)
@@ -239,6 +300,14 @@ public class HomeFragment extends Fragment {
                 navigateToCategory("Popular"));
         binding.tvSeeAllCategories.setOnClickListener(v ->
                 navigateToCategory("Action"));
+
+        binding.tvSeeAllAction.setOnClickListener(v -> navigateToCategory("Action"));
+        binding.tvSeeAllComedy.setOnClickListener(v -> navigateToCategory("Comedy"));
+        binding.tvSeeAllDrama.setOnClickListener(v -> navigateToCategory("Drama"));
+        binding.tvSeeAllHorror.setOnClickListener(v -> navigateToCategory("Horror"));
+        binding.tvSeeAllScifi.setOnClickListener(v -> navigateToCategory("Sci-Fi"));
+        binding.tvSeeAllAdventure.setOnClickListener(v -> navigateToCategory("Adventure"));
+        binding.tvSeeAllRomance.setOnClickListener(v -> navigateToCategory("Romance"));
 
         // Kategori chip'leri
         binding.catAction.setOnClickListener(v -> navigateToCategory("Action"));

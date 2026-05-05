@@ -12,8 +12,8 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "OMDB_API_KEY", "\"buraya yapıstır\"")
-        buildConfigField("String", "GROQ_API_KEY", "\"buraya yapıstır\"")
+        buildConfigField("String", "OMDB_API_KEY", "\"buraya\"")
+        buildConfigField("String", "GROQ_API_KEY", "\"buraya\"")
     }
 
     buildFeatures {
