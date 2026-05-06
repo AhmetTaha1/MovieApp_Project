@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="16dp"
+    android:gravity="center">
+
+    <!-- Çerçeve ve Baş Harf için FrameLayout -->
+    <FrameLayout
+        android:layout_width="70dp"
+        android:layout_height="70dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_actor_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="#000000"
+            app:strokeWidth="2dp"
+            app:strokeColor="#FFFFFF"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+        <!-- Oyuncunun baş harfini gösterecek kısım -->
+        <TextView
+            android:id="@+id/tv_actor_initial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            tools:text="L" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_actor_name"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/on_surface"
+        tools:text="Leonardo DiCaprio" />
+
+</LinearLayout>

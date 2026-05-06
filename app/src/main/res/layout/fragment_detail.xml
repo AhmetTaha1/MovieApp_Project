@@ -15,7 +15,7 @@
             android:id="@+id/iv_poster"
             android:layout_width="0dp"
             android:layout_height="300dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -80,17 +80,17 @@
             app:layout_constraintTop_toBottomOf="@id/tv_rating"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <!-- Tür -->
-        <TextView
-            android:id="@+id/tv_genre"
-            android:layout_width="wrap_content"
+        <!-- Türler (Chips) -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_genres"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_medium"
-            android:textColor="@color/text_secondary"
             android:paddingStart="@dimen/padding_medium"
+            android:paddingEnd="@dimen/padding_medium"
             android:paddingBottom="@dimen/padding_small"
             app:layout_constraintTop_toBottomOf="@id/tv_year"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Yönetmen -->
         <TextView
@@ -101,8 +101,34 @@
             android:textColor="@color/text_secondary"
             android:paddingStart="@dimen/padding_medium"
             android:paddingBottom="@dimen/padding_small"
-            app:layout_constraintTop_toBottomOf="@id/tv_genre"
+            app:layout_constraintTop_toBottomOf="@id/cg_genres"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <!-- Oyuncular -->
+        <TextView
+            android:id="@+id/tv_cast_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oyuncular"
+            android:textSize="@dimen/text_large"
+            android:textColor="@color/on_surface"
+            android:textStyle="bold"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingTop="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_small"
+            app:layout_constraintTop_toBottomOf="@id/tv_director"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingEnd="@dimen/padding_medium"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_cast_title" />
 
         <!-- Özet başlığı -->
         <TextView
@@ -116,7 +142,7 @@
             android:paddingStart="@dimen/padding_medium"
             android:paddingTop="@dimen/padding_medium"
             android:paddingBottom="@dimen/padding_small"
-            app:layout_constraintTop_toBottomOf="@id/tv_director"
+            app:layout_constraintTop_toBottomOf="@id/rv_cast"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <!-- Özet -->
@@ -132,19 +158,62 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Fragman butonu -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_trailer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <!-- Fragman Görseli (Thumbnail) -->
+        <FrameLayout
+            android:id="@+id/fl_trailer_container"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_margin="@dimen/margin_medium"
-            android:text="@string/trailer"
-            app:icon="@android:drawable/ic_media_play"
-            app:backgroundTint="@color/red_primary"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/tv_summary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
+            
+            <ImageView
+                android:id="@+id/iv_trailer_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+                
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:src="@android:drawable/ic_media_play"
+                app:tint="@android:color/white"
+                android:background="@drawable/bg_play_circle" />
+        </FrameLayout>
+
+        <!-- Benzer Yapımlar -->
+        <TextView
+            android:id="@+id/tv_similar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Benzer Yapımlar"
+            android:textSize="@dimen/text_large"
+            android:textColor="@color/on_surface"
+            android:textStyle="bold"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingTop="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_small"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/fl_trailer_container"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_similar_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingEnd="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_large"
+            android:clipToPadding="false"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tv_similar_title"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

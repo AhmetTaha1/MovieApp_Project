@@ -1,6 +1,18 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
 }
+
+// local.properties'ten değerleri oku
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+val rawTmdbApiKey = localProperties.getProperty("TMDB_API_KEY", "")
+val tmdbApiKey = rawTmdbApiKey.replace("\"", "").replace("'", "")
 
 android {
     namespace = "com.movielog.app"
@@ -12,8 +24,9 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "OMDB_API_KEY", "\"buraya\"")
-        buildConfigField("String", "GROQ_API_KEY", "\"buraya\"")
+        buildConfigField("String", "OMDB_API_KEY", "\"354f8d93\"")
+        buildConfigField("String", "GROQ_API_KEY", "\"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\"")
+        buildConfigField("String", "TMDB_API_KEY", "\"83ecccd70086adc08f636549fb8fffcd\"")
     }
 
     buildFeatures {
@@ -58,4 +71,12 @@ dependencies {
 
     // Google Sign-In
     implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+    // YouTube Player
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
+    // Local Test
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

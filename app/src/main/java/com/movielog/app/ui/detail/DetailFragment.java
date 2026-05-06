@@ -12,9 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 import com.movielog.app.R;
 import com.movielog.app.databinding.FragmentDetailBinding;
+import com.movielog.app.ui.adapter.CastAdapter;
+import com.movielog.app.ui.adapter.HorizontalMovieAdapter;
+import java.util.Arrays;
+import java.util.List;
 
 public class DetailFragment extends Fragment {
 
@@ -57,24 +62,70 @@ public class DetailFragment extends Fragment {
                 binding.tvTitle.setText(movie.getTitle());
                 binding.tvRating.setText("⭐ " + movie.getImdbRating());
                 binding.tvYear.setText("📅 " + movie.getYear());
-                binding.tvGenre.setText("🎭 " + movie.getGenre());
                 binding.tvDirector.setText("🎬 " + movie.getDirector());
                 binding.tvSummary.setText(movie.getPlot());
+
+                // Türleri Chip olarak ekle
+                binding.cgGenres.removeAllViews();
+                if (movie.getGenre() != null) {
+                    for (String genre : movie.getGenre().split(",")) {
+                        Chip chip = new Chip(requireContext());
+                        chip.setText(genre.trim());
+                        chip.setCheckable(false);
+                        binding.cgGenres.addView(chip);
+                    }
+                }
 
                 // Posteri yükle
                 Glide.with(requireContext())
                         .load(movie.getPoster())
                         .placeholder(R.drawable.ic_launcher_background)
                         .into(binding.ivPoster);
+            }
+        });
 
-                // Fragman butonuna YouTube araması ekle
-                binding.btnTrailer.setOnClickListener(v -> {
-                    String query = movie.getTitle() + " official trailer";
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("https://www.youtube.com/results?search_query=" +
-                                    Uri.encode(query)));
+        // Fragman işlemleri (Oynatıcı kalktı, sadece görsel var)
+        viewModel.getTrailerVideoId().observe(getViewLifecycleOwner(), videoId -> {
+            if (videoId != null && !videoId.isEmpty()) {
+                binding.flTrailerContainer.setVisibility(View.VISIBLE);
+                
+                // YouTube kapak fotoğrafını çek (hqdefault en mantıklısıdır)
+                String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+                Glide.with(requireContext())
+                        .load(thumbnailUrl)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(binding.ivTrailerThumb);
+
+                // Ortadaki play ikonuna veya görsele tıklandığında YouTube'a gitsin
+                binding.flTrailerContainer.setOnClickListener(v -> {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoId));
                     startActivity(intent);
                 });
+            }
+        });
+
+        // TMDB Üzerinden Oyuncuları (Credits) observe et
+        viewModel.getMovieCast().observe(getViewLifecycleOwner(), castList -> {
+            if (castList != null && !castList.isEmpty()) {
+                CastAdapter castAdapter = new CastAdapter(castList);
+                binding.rvCast.setAdapter(castAdapter);
+            }
+        });
+
+        // Benzer Yapımlar (Önerilenler) Listesi
+        viewModel.getSimilarMovies().observe(getViewLifecycleOwner(), movies -> {
+            if (movies != null && !movies.isEmpty()) {
+                binding.tvSimilarTitle.setVisibility(View.VISIBLE);
+                binding.rvSimilarMovies.setVisibility(View.VISIBLE);
+
+                HorizontalMovieAdapter adapter = new HorizontalMovieAdapter(selectedMovie -> {
+                    // Benzer filme tıklandığında Detay Sayfasını baştan yükle
+                    Bundle bundle = new Bundle();
+                    bundle.putString("movieId", selectedMovie.getImdbId());
+                    Navigation.findNavController(requireView()).navigate(R.id.detailFragment, bundle);
+                });
+                adapter.setMovies(movies);
+                binding.rvSimilarMovies.setAdapter(adapter);
             }
         });
 
